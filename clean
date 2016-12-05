@@ -1,0 +1,4 @@
+rm String.o
+rm Gene.o
+rm main.o
+rm a.out
