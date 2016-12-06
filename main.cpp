@@ -72,7 +72,6 @@ int main(int argc, char** argv){
     
 	clock_t ti, tf;
 	ti=clock(); //start time
-	cout << "here?" << endl;
 	Gene builder(allseq[0]);
 	int addedCounter = 1;
 	while(!done) {
@@ -80,17 +79,12 @@ int main(int argc, char** argv){
 		int lastAddC = addedCounter;
 
 		builder.build(allseq,counter,addedCounter,minOverlap);
-		builder.print();
-
-		cout << "SIZE OF ARRAY: " << counter - 1 << endl;
-		cout << "NUMBER ADDED: " << addedCounter << endl;
 		if(addedCounter == lastAddC){
 			done = true;
 		}
 	}
 
 	out_file << builder << endl;
-
 	in_file.close();
 	out_file.close();
 
@@ -101,7 +95,7 @@ int main(int argc, char** argv){
 	//write to console and file
 	cout << "Clock cycles elapsed: " << cycles << endl;
 	cout << "Time elapsed (seconds):" << time << endl;
-	out_file2 << ",File: " << argv[1] << "," << cycles << "," << time << "," << endl; 
+	out_file2 << "File: " << argv[1] << "," << cycles << "," << time << "," << endl; 
 	out_file2.close();
 }
 
