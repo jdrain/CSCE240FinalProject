@@ -79,12 +79,6 @@ int main(int argc, char** argv){
 		//building full gene
 		int lastAddC = addedCounter;
 
-		/*
-		build(builder, allseq, counter, addedCounter);
-		builder.print();
-		cout << endl;
-		*/
-
 		builder.build(allseq,counter,addedCounter,minOverlap);
 		builder.print();
 
@@ -110,96 +104,4 @@ int main(int argc, char** argv){
 	out_file2 << ",File: " << argv[1] << "," << cycles << "," << time << "," << endl; 
 	out_file2.close();
 }
-
-
-void build(Gene &builder, Gene allseq[], int counter, int &addedCounter) {
-	// looking at beginning of builder
-	String builderfirst20(builder.subString(0, 20));
-
-	int index(0);
-	// iterate through all sequences
-	for(int j = 1; j < counter -1; j++)
-	{
-		// If havent already looked at the gene operate
-		if(allseq[j].added == false){
-			// stupid copying
-			char* first20temp = new char[20];
-			first20temp = builderfirst20.getData();
-
-			char first20temp2[21];
-			for(int k = 0; k < 20; k++)
-			{
-				first20temp2[k] = first20temp[k];
-			}
-			first20temp2[20] = '\0';
-
-			// Find the first 20 somewhere in another sequence
-			index = allseq[j].find(first20temp2, 0);
-
-			//Found one?
-			if(index != -1)
-			{
-				String comp(allseq[j].subString(index + 20, allseq[j].length()-index-20));
-
-				String buildersub(builder.subString(20, allseq[j].length() - index - 20));
-
-				//if we have a match we add overhang to builder string
-				if(comp == buildersub)
-				{
-					builder = Gene(allseq[j].subString(0, index)) + builder;
-
-					builderfirst20 = builder.subString(0, 20);
-					allseq[j].added = true;
-					addedCounter++;
-				}
-			}
-		}
-	}
-
-	// looking at end of builder if couldn't add to beginning
-	String builderlast20(builder.subString(builder.length() - 20, 20));
-
-	index=0;
-        for(int j = 1; j < counter -1; j++)
-	{
-		if(allseq[j].added == false)
-		{
-		    char* last20temp = new char[20];
-		    last20temp = builderlast20.getData();
-
-		    char last20temp2[21];
-		    for(int j = 0; j < 20; j++)
-		    {
-		        last20temp2[j] = last20temp[j];
-		    }
-		    last20temp2[20] = '\0';
-
-		    index = allseq[j].find(last20temp2, 0);
-		    if(index != -1)
-		    {
-			String comp(allseq[j].subString(0, index));
-
-			String buildersub(builder.subString(builder.length() - 20 - comp.length(), comp.length()));
-
-			if(comp == buildersub)
-			{
-			    builder = builder+Gene(allseq[j].subString(index + 20, allseq[j].length() - index - 20));
-
-		    	    builderlast20 = builder.subString(builder.length() - 20, 20);
-    			    allseq[j].added = true;
-			    addedCounter++;
-			}
-		    }
-		}
-	}
-}
-
-
-
-
-
-
-
-
-
 
