@@ -85,9 +85,9 @@ void Gene::build(Gene allseq[], int counter, int &addedCounter, int minOverlap)
 		    char* lastSegmentTemp = new char[minOverlap];
 		    lastSegmentTemp = builderLastSegment.getData();
 		    char lastSegmentTemp2[minOverlap + 1];
-		    for(int j = 0; j < minOverlap; j++)
+		    for(int h = 0; h < minOverlap; h++)
 		    {
-		        lastSegmentTemp2[j] = lastSegmentTemp[j];
+		        lastSegmentTemp2[h] = lastSegmentTemp[h];
 		    }
 		    lastSegmentTemp2[minOverlap] = '\0';
 		    index = allseq[j].find(lastSegmentTemp2, 0);
